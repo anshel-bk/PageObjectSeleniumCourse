@@ -25,7 +25,7 @@ from .pages.main_page import MainPage
 
 class TestUserAddToBasketFromProductPage:
 
-    @pytest.fixture(scope="function", autouse=True)
+    @pytest.fixture(scope="function",autouse=True)
     def setup(self, browser):
         link = "http://selenium1py.pythonanywhere.com/ru/accounts/login/"
         page =  LoginPage(browser, link)
