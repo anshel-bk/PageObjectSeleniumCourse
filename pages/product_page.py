@@ -15,6 +15,7 @@ class ProductPage(BasePage):
         self.should_be_price_product_add_basket()
 
 
+
     def should_be_product_page_url(self):
         # реализуйте проверку на корректный url адрес
         assert "catalogue" in self.browser.current_url, "Слово catalogue отсутствует в url"
@@ -36,3 +37,15 @@ class ProductPage(BasePage):
         book_price = self.browser.find_element(*ProductPageLocators.BOOK_PRICE).text
         cart_size = self.browser.find_element(*ProductPageLocators.BASKET_PRICE).text
         assert book_price == cart_size, f"цена {book_price} не равна {cart_size}"
+
+    def test_guest_cant_see_success_message_after_adding_product_to_basket(self):
+        assert self.is_element_present(self.browser.find_element(*ProductPageLocators.BASKET_PRICE), "success message "
+                                                                                                     "отсутствует")
+
+    def test_guest_cant_see_success_message(self):
+        assert self.is_element_present(self.browser.find_element(*ProductPageLocators.BASKET_PRICE),
+                                       "success message отсуствует")
+
+    def test_message_disappeared_after_adding_product_to_basket(self):
+        assert self.is_element_present(self.browser.find_element(*ProductPageLocators.BASKET_PRICE),
+                                       "success message отсуствует")
