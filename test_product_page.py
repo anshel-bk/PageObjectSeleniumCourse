@@ -22,7 +22,7 @@ def test_guest_can_add_product_to_basket(browser, offer):
     product_page.solve_quiz_and_get_code()
     product_page.should_be_expected_result()
 
-@pytest.mark.xfail(reason="Изначально выданы невереные условия")
+@pytest.mark.xfail(reason="Изначально выданы неверные условия")
 def test_guest_see_messages(browser, offer):
     link = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{offer}"
     page = MainPage(browser, link)
@@ -32,6 +32,7 @@ def test_guest_see_messages(browser, offer):
     product_page.should_be_product_page()
     product_page.test_guest_cant_see_success_message_after_adding_product_to_basket()
     product_page.test_message_disappeared_after_adding_product_to_basket()
+
 
 def test_guest_should_see_login_link_on_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
