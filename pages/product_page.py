@@ -37,7 +37,7 @@ class ProductPage(BasePage):
         assert book_price == cart_size, f"цена {book_price} не равна {cart_size}"
 
     def test_guest_cant_see_success_message_after_adding_product_to_basket(self):
-        assert self.is_not_element_present(*ProductPageLocators.BASKET_PRICE), "success message присутствует"
+        assert self.is_not_element_present(*ProductPageLocators.BASKET_PRICE), "success message не присутствует"
 
     def cant_see_success_message(self):
         assert self.is_not_element_present(*ProductPageLocators.SUCESS_MESSAGE), "success message присуствует"

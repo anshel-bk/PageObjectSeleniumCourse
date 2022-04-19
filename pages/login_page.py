@@ -31,8 +31,6 @@ class LoginPage(BasePage):
         assert self.send_keys_element(*LoginPageLocators.REGISTER_PASSWORD, password), "Reg password is not exist"
         assert self.send_keys_element(*LoginPageLocators.REGISTER_CONFIRM_PASSWORD,
                                       password), "Reg confirm password is not exist"
-        try:
-            assert self.browser.find_element(*LoginPageLocators.REGISTER_BUTTON).click()
-        except Exception as ex:
-            print("Ошибка", ex)
+        self.browser.find_element(*LoginPageLocators.REGISTER_BUTTON).click()
+
 
