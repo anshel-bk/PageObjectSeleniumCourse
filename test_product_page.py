@@ -4,6 +4,7 @@ import faker
 import pytest
 
 from pages.base_page import BasePage
+from pages.basket_page import BasketPage
 from pages.login_page import LoginPage
 from pages.product_page import ProductPage
 from .pages.main_page import MainPage
@@ -33,6 +34,7 @@ class TestUserAddToBasketFromProductPage(object):
         page.open()
         page.cant_see_success_message()
 
+    @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser):
         link = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer"
         product_page = BasePage(browser, link)
@@ -63,8 +65,32 @@ def test_guest_should_see_login_link_on_product_page(browser):
     page.should_be_login_link()
 
 
+@pytest.mark.need_review
+def test_guest_can_add_product_to_basket(browser):
+    link = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer"
+    product_page = BasePage(browser, link)
+    product_page.open()
+    product_page = ProductPage(browser, link)
+    product_page.cant_see_success_message()
+    product_page.should_be_product_page()
+    product_page.solve_quiz_and_get_code()
+    product_page.should_be_expected_result()
+
+
+@pytest.mark.need_review
 def test_guest_can_go_to_login_page_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(browser, link)
     page.open()
     page.go_to_login_page()
+
+
+@pytest.mark.need_review
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = MainPage(browser, link)
+    page.open()
+    basket_page = BasketPage(browser, browser.current_url)
+    basket_page.basket_button_head_on_site()
+    basket_page.press_to_basket_page()
+    basket_page.basket_head_empty()
